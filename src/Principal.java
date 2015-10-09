@@ -42,8 +42,7 @@ public class Principal {
             System.out.println("6) Lista Libros Estudiante");
             System.out.println("7) Lista de Estudiantes");
             System.out.println("8) Lista de Profesores");
-            System.out.println("9) Lista de Libros");         
-            System.out.println("10) Salir");
+            System.out.println("9) Salir");
             opcion = teclado.nextInt();
             teclado.skip("\n");
             
@@ -112,19 +111,10 @@ public class Principal {
                     }             
                                      
                     break;
-                    
                 case 5:
                                       
-                    /*System.out.println("Digite el codigo del Libro:");
-                    cod = teclado.nextInt();
-                    teclado.skip("\n");
-                    */
-                    
                     cod = elLibro.capturaCodigo();
-                    
-                    System.out.println("Digite la cedula del Profesor:");
-                    ced = teclado.nextInt();
-                    teclado.skip("\n");
+                    ced = elProfe.capturaCedula();
                     
                     elProfe = contenedores.buscarProfesor(ced);
                     elLibro = contenedores.buscarLibro(cod);            
@@ -146,9 +136,7 @@ public class Principal {
                     }else{
                         System.out.println("No se pudo agregar el registro.");
                     }             
-                    
                     break;
-                
                 case 6:
                     
                     ReservacionEstudiantes[] listaReserEstu = contenedores.getListaReservaEstu();
@@ -161,22 +149,27 @@ public class Principal {
                     }
                     
                      break;
-                    
-                case 7:
+                case 7: //lista de estudiantes
                     
                     Estudiante[] listaEstu = contenedores.getListaEstudiante();
-                    
+                    System.out.println("Lista de Estudiantes Agregados");
                     for (int i = 0; i < numEstu; i++) {
-                              
-                        System.out.println("Lista de Estudiantes Agregados " + listaEstu[i].getNombre());                     
+                        System.out.println(listaEstu[i].getNombre());                     
                     }
-                   
+                     break;                       
+                case 8: //lista de profesores
+                    
+                    Profesor[] listaProfe = contenedores.getListaProfesor();
+                    
+                    System.out.println("Lista de Profesores Agregados"); 
+                    for (int i = 0; i < numProfe; i++) {
+                        System.out.println(listaProfe[i].getNombre());                     
+                    }
                      break;                       
                 default:
                     System.out.println("OPCION INVALIDA!!!");
-                    break;
+                    break;    
             }
         }while(opcion != 10);           
     }
-    
 }

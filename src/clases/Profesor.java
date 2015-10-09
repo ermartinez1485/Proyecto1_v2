@@ -53,9 +53,19 @@ public class Profesor extends Persona{
          teclado.skip("\n");
          System.out.println("Digite el Salario del Profesor:");
          this.salario = teclado.nextDouble();
+         teclado.skip("\n"); 
          System.out.println("Digite la Escuela del Profesor");
          this.escuela = teclado.nextLine();
-         teclado.skip("\n");        
+                
+    }
+    
+    public Integer capturaCedula(){
+        
+         Scanner teclado = new Scanner(System.in);
+         System.out.println("Digite la cedula del Profesor");
+         this.cedula = teclado.nextInt();
+         teclado.skip("\n");
+         return this.cedula;
     }
     
     
