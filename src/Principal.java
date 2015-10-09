@@ -34,6 +34,10 @@ public class Principal {
         Estudiante elEstu = new Estudiante();
         Integer cod = 0;
         Integer ced = 0;
+        Integer numEstu = 0;
+        Integer numProfe = 0;
+        Integer numLibro =0;
+        
         
         do{
             System.out.println("Qué desea hacer?");
@@ -43,6 +47,10 @@ public class Principal {
             System.out.println("4) Reservar Libros Estudiante");
             System.out.println("5) Reservar Libros Profesor");
             System.out.println("6) Lista Libros Estudiante");
+            System.out.println("7) Lista de Estudiantes");
+            System.out.println("8) Lista de Profesores");
+            System.out.println("9) Lista de Libros");
+            
             
             System.out.println("7) Salir");
             opcion = teclado.nextInt();
@@ -55,13 +63,11 @@ public class Principal {
                     res = contenedores.agregaEstudiante(elEstu);
                     if(res){
                         System.out.println("Registro agregado");
+                        numEstu++;
                     }else{
                         System.out.println("No se pudo agregar el registro.");
                     }
                     
-                    System.out.println("cedula " + elEstu.getCedula());
-                    System.out.println("cedula " + elEstu.getCarrera());
-                    System.out.println("cedula " + elEstu.getNombre());
                     
                     break;
                 case 2:
@@ -71,6 +77,7 @@ public class Principal {
                     res = contenedores.agregaProfesor(elProfe);
                     if(res){
                         System.out.println("Registro agregado");
+                        numProfe++;
                     }else{
                         System.out.println("No se pudo agregar el registro.");
                     }
@@ -81,6 +88,7 @@ public class Principal {
                     res = contenedores.agregaLibro(elLibro);
                     if(res){
                         System.out.println("Registro agregado");
+                        numLibro++;
                     }else{
                         System.out.println("No se pudo agregar el registro.");
                     }                   
@@ -167,22 +175,36 @@ public class Principal {
                     
                     ReservacionEstudiantes[] listaReserEstu = contenedores.getListaReservaEstu();
                     
-                    for (int i = 0; i < listaReserEstu.length-1; i++) {
+                    for (int i = 0; i < numEstu; i++) {
                         
                         
                         System.out.println("Lista de reservas X Estudiante" + listaReserEstu[i]);
+                        
+                        
+                    }
+
+                     break;
+                    
+                case 7:
+                    
+                    Estudiante[] listaEstu = contenedores.getListaEstudiante();
+                    
+                    for (int i = 0; i < numEstu; i++) {
+                        
+                        
+                        System.out.println("Lista de reservas X Estudiante" + listaEstu[i].getNombre());
                         
                     }
                     
                     
                         
-                     break;   
+                     break;    
                     
                 default:
                     System.out.println("OPCION INVALIDA!!!");
                     break;
             }
-        }while(opcion != 7);  
+        }while(opcion != 10);  
         
         
     }
