@@ -56,5 +56,12 @@ public class Estudiante extends Persona{
          teclado.skip("\n");        
     }
     
+    public Integer capturaCedula(){
+         Scanner teclado = new Scanner(System.in);
+         System.out.println("Digite la cedula del Estudiante:");
+         this.cedula = teclado.nextInt();
+         teclado.skip("\n");  
+         return this.cedula;
+    }
 
 }

@@ -90,5 +90,14 @@ public class Libro {
          
     }
     
+    public Integer capturaCodigo(){
+        
+         Scanner teclado = new Scanner(System.in);
+         System.out.println("Digite el codigo del Libro:");
+         this.codigo = teclado.nextInt();
+         teclado.skip("\n");
+         return this.codigo;
+    }
+    
     
 }

@@ -13,8 +13,7 @@ import java.util.Date;
  * @author Eric Martinez Solis
  */
 public class Contenedores {
-    
-    
+   
     Estudiante[] listaEstudiante;
     Profesor[] listaProfesor;
     Libro[] listaLibros;
@@ -30,7 +29,6 @@ public class Contenedores {
         this.listaReservaProfe = new ReservacionProfesores[10];
         
     }
-    
     
     public boolean agregaEstudiante(Estudiante estu){
         for (int i = 0; i < this.listaEstudiante.length; i++) {
@@ -160,9 +158,5 @@ public class Contenedores {
 
     public void setListaLibros(Libro[] listaLibros) {
         this.listaLibros = listaLibros;
-    }
-    
-    
-    
-    
+    } 
 }

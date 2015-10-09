@@ -1,4 +1,3 @@
-
 import clases.Contenedores;
 import clases.Estudiante;
 import clases.Libro;
@@ -6,15 +5,9 @@ import clases.Profesor;
 import clases.ReservacionEstudiantes;
 import java.util.Scanner;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /**
  *
- * @author Casa
+ * @author Eric Martinez Solis
  */
 public class Principal {
 
@@ -49,10 +42,8 @@ public class Principal {
             System.out.println("6) Lista Libros Estudiante");
             System.out.println("7) Lista de Estudiantes");
             System.out.println("8) Lista de Profesores");
-            System.out.println("9) Lista de Libros");
-            
-            
-            System.out.println("7) Salir");
+            System.out.println("9) Lista de Libros");         
+            System.out.println("10) Salir");
             opcion = teclado.nextInt();
             teclado.skip("\n");
             
@@ -66,13 +57,11 @@ public class Principal {
                         numEstu++;
                     }else{
                         System.out.println("No se pudo agregar el registro.");
-                    }
-                    
+                    }                  
                     
                     break;
-                case 2:
                     
-                    
+                case 2:                                   
                     elProfe.capturaDatos();
                     res = contenedores.agregaProfesor(elProfe);
                     if(res){
@@ -82,8 +71,8 @@ public class Principal {
                         System.out.println("No se pudo agregar el registro.");
                     }
                     break;
-                case 3:
                     
+                case 3:                  
                     elLibro.capturaDatos();
                     res = contenedores.agregaLibro(elLibro);
                     if(res){
@@ -91,28 +80,16 @@ public class Principal {
                         numLibro++;
                     }else{
                         System.out.println("No se pudo agregar el registro.");
-                    }                   
-                    
+                    }                                      
                     break;
                     
                 case 4:
-                                     
-
-        
-                    System.out.println("Digite el codigo del Libro:");
-                    cod = teclado.nextInt();
-                    teclado.skip("\n");
-                    System.out.println("Digite la cedula del Estudiante:");
-                    ced = teclado.nextInt();
-                    teclado.skip("\n");
                     
-                    elEstu = contenedores.buscarEstudiante(ced);
-                    System.out.println("cedula " + elEstu.getCedula());
-                    //System.out.println("cedula " + elEstu.getNombre());
+                    cod = elLibro.capturaCodigo();
+                    ced = elEstu.capturaCedula();
                     
+                    elEstu = contenedores.buscarEstudiante(ced);                  
                     elLibro = contenedores.buscarLibro(cod);
-                    System.out.println("codigo " + elLibro.getCodigo());
-                   // System.out.println("codigo " + elLibro.getNombre());
                                                            
                     if(elEstu != null && elLibro != null){
                         res = contenedores.reservarEstudiante(elEstu, elLibro);            
@@ -133,17 +110,18 @@ public class Principal {
                     }else{
                         System.out.println("No se pudo agregar el registro.");
                     }             
-                    
-                    
-                    
+                                     
                     break;
                     
                 case 5:
-                                     
-   
-                    System.out.println("Digite el codigo del Libro:");
+                                      
+                    /*System.out.println("Digite el codigo del Libro:");
                     cod = teclado.nextInt();
                     teclado.skip("\n");
+                    */
+                    
+                    cod = elLibro.capturaCodigo();
+                    
                     System.out.println("Digite la cedula del Profesor:");
                     ced = teclado.nextInt();
                     teclado.skip("\n");
@@ -176,13 +154,12 @@ public class Principal {
                     ReservacionEstudiantes[] listaReserEstu = contenedores.getListaReservaEstu();
                     
                     for (int i = 0; i < numEstu; i++) {
-                        
-                        
-                        System.out.println("Lista de reservas X Estudiante" + listaReserEstu[i]);
-                        
-                        
+                                 
+                        System.out.println("Estudiante " + listaReserEstu[i].getEstudiante().getNombre());
+                        System.out.println("Libro " + listaReserEstu[i].getLibro().getNombre()); 
+                        System.out.println("*******************************************");
                     }
-
+                    
                      break;
                     
                 case 7:
@@ -190,23 +167,16 @@ public class Principal {
                     Estudiante[] listaEstu = contenedores.getListaEstudiante();
                     
                     for (int i = 0; i < numEstu; i++) {
-                        
-                        
-                        System.out.println("Lista de reservas X Estudiante" + listaEstu[i].getNombre());
-                        
+                              
+                        System.out.println("Lista de Estudiantes Agregados " + listaEstu[i].getNombre());                     
                     }
-                    
-                    
-                        
-                     break;    
-                    
+                   
+                     break;                       
                 default:
                     System.out.println("OPCION INVALIDA!!!");
                     break;
             }
-        }while(opcion != 10);  
-        
-        
+        }while(opcion != 10);           
     }
     
 }

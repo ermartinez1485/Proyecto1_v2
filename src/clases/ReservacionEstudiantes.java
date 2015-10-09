@@ -10,9 +10,6 @@ import java.util.Date;
 import java.util.Scanner;
 
 /**
- *        return estudiante;
-    }
-
  * @author Casa
  */
 public class ReservacionEstudiantes {
@@ -62,10 +59,5 @@ public class ReservacionEstudiantes {
 
     public void setFechaReservacion(Date fechaReservacion) {
         this.fechaReservacion = fechaReservacion;
-    }
-
-    
-    
-    
-    
+    }  
 }
