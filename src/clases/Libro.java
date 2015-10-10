@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package clases;
 
 import java.util.Date;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /**
@@ -14,7 +14,7 @@ import java.util.Scanner;
  * @author Casa
  */
 public class Libro {
-    
+
     public Integer codigo;
     public String nombre;
     public String autor;
@@ -71,33 +71,63 @@ public class Libro {
     public void setPrecio(Double precio) {
         this.precio = precio;
     }
-    
-    public void capturaDatos(){
-        
-         Scanner teclado = new Scanner(System.in);
-         System.out.println("Digite el codigo del Libro:");
-         this.codigo = teclado.nextInt();
-         teclado.skip("\n");
-         System.out.println("Digite el nombre del Libro:");
-         this.nombre = teclado.nextLine();
-         System.out.println("Digite el nombre del Autor:");
-         this.autor = teclado.nextLine();         
-         System.out.println("El Año del Libro es:" + this.anno);  
-         
-         System.out.println("Digite el Precio del Libro:");
-         this.precio = teclado.nextDouble();
-         teclado.skip("\n");
-         
+
+    public void capturaDatos() {
+        boolean bError = true;
+        Scanner teclado = new Scanner(System.in);
+        System.out.println("Digite el codigo del Libro:");
+
+        do {
+            try {
+                this.codigo = teclado.nextInt();
+                bError = false;
+            } catch (InputMismatchException ex) {
+                System.out.println("Escriba un numero valido para el codigo del libro EJ: 40554 ");
+                teclado.next();
+                bError = true;
+            }
+        } while (bError);
+
+        teclado.skip("\n");
+        System.out.println("Digite el nombre del Libro:");
+        this.nombre = teclado.nextLine();
+        System.out.println("Digite el nombre del Autor:");
+        this.autor = teclado.nextLine();
+
+        System.out.println("El Año del Libro es:" + this.anno);
+
+        System.out.println("Digite el Precio del Libro:");
+
+        do {
+            try {
+                this.precio = teclado.nextDouble();
+                bError = false;
+            } catch (InputMismatchException ex) {
+                System.out.println("Escriba un numero valido para el precio del libro EJ: 20.00 ");
+                teclado.next();
+                bError = true;
+            }
+        } while (bError);
+
+        teclado.skip("\n");
     }
-    
-    public Integer capturaCodigo(){
-        
-         Scanner teclado = new Scanner(System.in);
-         System.out.println("Digite el codigo del Libro:");
-         this.codigo = teclado.nextInt();
-         teclado.skip("\n");
-         return this.codigo;
+
+    public Integer capturaCodigo() {
+        boolean bError = true;
+        Scanner teclado = new Scanner(System.in);
+        System.out.println("Digite el codigo del Libro:");
+        do {
+            try {
+                this.codigo = teclado.nextInt();
+                bError = false;
+            } catch (NumberFormatException  ex) {
+                System.out.println("error" + ex);
+                System.out.println("Escriba un numero valido para el codigo del libro EJ: 40554 ");
+                teclado.next();
+                bError = true;
+            }
+        } while (bError);
+        teclado.skip("\n");
+        return this.codigo;
     }
-    
-    
 }

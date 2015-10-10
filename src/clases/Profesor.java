@@ -3,22 +3,22 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package clases;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /**
  *
- * @author Casa
+ * @author Eric Martinez
  */
-public class Profesor extends Persona{
-    
+public class Profesor extends Persona {
+
     protected Double salario;
     protected String escuela;
-    
-    public Profesor(){
-    
+
+    public Profesor() {
+
         super();
     }
 
@@ -42,31 +42,58 @@ public class Profesor extends Persona{
     public void setEscuela(String escuela) {
         this.escuela = escuela;
     }
-    
-    
-    public void capturaDatos(){
-         Scanner teclado = new Scanner(System.in);
-         System.out.println("Digite el nombre del Profesor:");
-         this.nombre = teclado.nextLine();
-         System.out.println("Digite la cedula del Profesor:");
-         this.cedula = teclado.nextInt();
-         teclado.skip("\n");
-         System.out.println("Digite el Salario del Profesor:");
-         this.salario = teclado.nextDouble();
-         teclado.skip("\n"); 
-         System.out.println("Digite la Escuela del Profesor");
-         this.escuela = teclado.nextLine();
-                
+
+    public void capturaDatos() {
+        boolean bError = true;
+        Scanner teclado = new Scanner(System.in);
+        System.out.println("Digite el nombre del Profesor:");
+        this.nombre = teclado.nextLine();
+
+        System.out.println("Digite la cedula del Profesor:");
+        do {
+            try {
+                this.cedula = teclado.nextInt();
+                bError = false;
+            } catch (InputMismatchException ex) {
+                System.out.println("Escriba un numero valido para la cedula EJ: 112700030 ");
+                teclado.next();
+                bError = true;
+            }
+        } while (bError);
+
+         //teclado.skip("\n");
+        System.out.println("Digite el Salario del Profesor:");
+        do {
+            try {
+                this.salario = teclado.nextDouble();
+                bError = false;
+            } catch (InputMismatchException ex) {
+                System.out.println("Escriba un numero valido para el salario EJ: 20.30 ");
+                teclado.next();
+                bError = true;
+            }
+        } while (bError);
+
+        teclado.skip("\n");
+        System.out.println("Digite la Escuela del Profesor");
+        this.escuela = teclado.nextLine();
     }
-    
-    public Integer capturaCedula(){
-        
-         Scanner teclado = new Scanner(System.in);
-         System.out.println("Digite la cedula del Profesor");
-         this.cedula = teclado.nextInt();
-         teclado.skip("\n");
-         return this.cedula;
+
+    public Integer capturaCedula() {
+        boolean bError = true;
+        Scanner teclado = new Scanner(System.in);
+        System.out.println("Digite la cedula del Profesor:");
+        do {
+            try {
+                this.cedula = teclado.nextInt();
+                bError = false;
+            } catch (InputMismatchException ex) {
+                System.out.println("Escriba un numero valido para la cedula EJ: 112700030 ");
+                teclado.next();
+                bError = true;
+            }
+        } while (bError);
+        teclado.skip("\n");
+        return this.cedula;
     }
-    
-    
 }
