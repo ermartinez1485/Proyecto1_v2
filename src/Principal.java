@@ -1,9 +1,11 @@
+
 import clases.Contenedores;
 import clases.Estudiante;
 import clases.Libro;
 import clases.Profesor;
 import clases.ReservacionEstudiantes;
 import clases.ReservacionProfesores;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /**
@@ -17,21 +19,23 @@ public class Principal {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        int opcion;
+        int opcion = 0;
         Scanner teclado = new Scanner(System.in);
         Contenedores contenedores = new Contenedores();
         boolean res = false;
         Profesor elProfe = new Profesor();
         Libro elLibro = new Libro();
-        ReservacionEstudiantes reserv = new ReservacionEstudiantes();
         Estudiante elEstu = new Estudiante();
         Integer cod = 0;
         Integer ced = 0;
         Integer numEstu = 0;
         Integer numProfe = 0;
-        Integer numLibro =0;
+        Integer numLibro = 0;
+        Integer numReserEstu = 0;
+        Integer numReserProfe = 0;
+        boolean bError = true;
 
-        do{
+        do {
             System.out.println("Qué desea hacer?");
             System.out.println("1) Agregar Estudiante");
             System.out.println("2) Agregar Profesor");
@@ -43,148 +47,166 @@ public class Principal {
             System.out.println("8) Lista de Estudiantes");
             System.out.println("9) Lista de Profesores");
             System.out.println("10) Precio Total de Todos Los Libros Prestados");
-            System.out.println("11) Salir");
-            opcion = teclado.nextInt();
+            System.out.println("11) Obtener Libro mas Prestado");
+            System.out.println("12) Salir");
+
+            try {
+                opcion = teclado.nextInt();
+                bError = true;
+            } catch (InputMismatchException ex) {
+                System.out.println("Escriba un numero valido para el menu ");
+                teclado.next();
+                bError = true;
+            }
             teclado.skip("\n");
-            
-            switch(opcion){
-                case 1: 
+
+            switch (opcion) {
+                case 1:
                     elEstu = new Estudiante();
                     elEstu.capturaDatos();
                     res = contenedores.agregaEstudiante(elEstu);
-                    if(res){
+                    if (res) {
                         System.out.println("Registro agregado");
                         numEstu++;
-                    }else{
-                        System.out.println("No se pudo agregar el registro.");
-                    }                  
-                    break;
-                case 2:                                   
-                    elProfe = new Profesor();
-                    elProfe.capturaDatos();
-                    res = contenedores.agregaProfesor(elProfe);
-                    if(res){
-                        System.out.println("Registro agregado");
-                        numProfe++;
-                    }else{
+                    } else {
                         System.out.println("No se pudo agregar el registro.");
                     }
                     break;
-                case 3:     
+                case 2:
+                    elProfe = new Profesor();
+                    elProfe.capturaDatos();
+                    res = contenedores.agregaProfesor(elProfe);
+                    if (res) {
+                        System.out.println("Registro agregado");
+                        numProfe++;
+                    } else {
+                        System.out.println("No se pudo agregar el registro.");
+                    }
+                    break;
+                case 3:
                     elLibro = new Libro();
                     elLibro.capturaDatos();
                     res = contenedores.agregaLibro(elLibro);
-                    if(res){
+                    if (res) {
                         System.out.println("Registro agregado");
                         numLibro++;
-                    }else{
+                    } else {
                         System.out.println("No se pudo agregar el registro.");
-                    }                                      
+                    }
                     break;
                 case 4:
                     cod = elLibro.capturaCodigo();
                     ced = elEstu.capturaCedula();
-                    elEstu = contenedores.buscarEstudiante(ced);                  
+                    elEstu = contenedores.buscarEstudiante(ced);
                     elLibro = contenedores.buscarLibro(cod);
-                                                           
-                    if(elEstu != null && elLibro != null){
-                        res = contenedores.reservarEstudiante(elEstu, elLibro);            
-                    }else{
-                        if(elEstu == null){
-                           System.out.println("Cedula no encontrado, debe de agregar el Estudiante Primero"); 
-                           res = false;
-                        }
-                        else{
+
+                    if (elEstu != null && elLibro != null) {
+                        res = contenedores.reservarEstudiante(elEstu, elLibro);
+                    } else {
+                        if (elEstu == null) {
+                            System.out.println("Cedula no encontrado, debe de agregar el Estudiante Primero");
+                            res = false;
+                        } else {
                             // libro es nulo
                             System.out.println("Codigo no encontrado, debe de agregar el libro Primero");
                             res = false;
-                        }                       
+                        }
                     }
-                    if(res){
+                    if (res) {
                         System.out.println("Registro agregado");
-                    }else{
+                        numReserEstu++;
+                    } else {
                         System.out.println("No se pudo agregar el registro.");
-                    }             
+                    }
                     break;
                 case 5:
-                                      
+
                     cod = elLibro.capturaCodigo();
                     ced = elProfe.capturaCedula();
                     elProfe = contenedores.buscarProfesor(ced);
-                    elLibro = contenedores.buscarLibro(cod);            
-                                                           
-                    if(elProfe != null && elLibro != null){
-                        res = contenedores.reservarEstudiante(elEstu, elLibro);            
-                    }else{
-                        if(elProfe == null){
-                           System.out.println("Cedula no encontrado, debe de agregar el Profesor Primero"); 
-                        }
-                        else{
+                    elLibro = contenedores.buscarLibro(cod);
+
+                    if (elProfe != null && elLibro != null) {
+                        res = contenedores.reservarProfesor(elProfe, elLibro);
+                    } else {
+                        if (elProfe == null) {
+                            System.out.println("Cedula no encontrado, debe de agregar el Profesor Primero");
+                        } else {
                             // libro es nulo
-                            System.out.println("Codigo no encontrado, debe de agregar el libro Primero");                           
-                        }                       
+                            System.out.println("Codigo no encontrado, debe de agregar el libro Primero");
+                        }
                     }
-                    if(res){
+                    if (res) {
                         System.out.println("Registro agregado");
-                    }else{
+                        numReserProfe++;
+                    } else {
                         System.out.println("No se pudo agregar el registro.");
-                    }             
+                    }
                     break;
                 case 6:
-                    
+
                     ReservacionEstudiantes[] listaReserEstu = contenedores.getListaReservaEstu();
-                    
-                    for (int i = 0; i < numEstu; i++) {
+
+                    for (int i = 0; i < numReserEstu; i++) {
                         System.out.println("************Reserva de Libros X Estudiante****************");
                         System.out.println("Estudiante " + listaReserEstu[i].getEstudiante().getNombre());
-                        System.out.println("Libro " + listaReserEstu[i].getLibro().getNombre()); 
+                        System.out.println("Libro " + listaReserEstu[i].getLibro().getNombre());
                         System.out.println("*******************************************");
                     }
-                    
-                     break;
+
+                    break;
                 case 7:
                     ReservacionProfesores[] listaReserEProfe = contenedores.getListaReservaProfe();
-                    for (int i = 0; i < numEstu; i++) {
-                                 
+                    for (int i = 0; i < numReserProfe; i++) {
+
                         System.out.println("Profe " + listaReserEProfe[i].getProfesor().getNombre());
-                        System.out.println("Libro " + listaReserEProfe[i].getLibro().getNombre()); 
+                        System.out.println("Libro " + listaReserEProfe[i].getLibro().getNombre());
                         System.out.println("*******************************************");
                     }
-                     break;    
+                    break;
                 case 8: //lista de estudiantes
-                    
+
                     Estudiante[] listaEstu = contenedores.getListaEstudiante();
                     System.out.println("Lista de Estudiantes Agregados");
                     for (int i = 0; i < numEstu; i++) {
-                        System.out.println(listaEstu[i].getNombre());                     
+                        System.out.println(listaEstu[i].getNombre());
                     }
-                     break;                       
+                    break;
                 case 9: //lista de profesores
-                    
+
                     Profesor[] listaProfe = contenedores.getListaProfesor();
-                    
-                    System.out.println("Lista de Profesores Agregados"); 
+
+                    System.out.println("Lista de Profesores Agregados");
                     for (int i = 0; i < numProfe; i++) {
-                        System.out.println(listaProfe[i].getNombre());                     
+                        System.out.println(listaProfe[i].getNombre());
                     }
-                     break;  
+                    break;
                 case 10: //lista de profesores
                     Double total = 0.0;
                     Libro[] listaLibros = contenedores.getListaLibros();
-                    
+
                     for (int i = 0; i < numLibro; i++) {
-                        total += listaLibros[i].getPrecio();                     
+                        total += listaLibros[i].getPrecio();
                     }
-                    System.out.println("Lista de Libros Agregados y el monto total:"); 
+                    System.out.println("Lista de Libros Agregados y el monto total:");
                     for (int i = 0; i < numLibro; i++) {
                         System.out.println(listaLibros[i].getNombre());
                     }
                     System.out.println("Total: " + total);
-                     break; 
+                    break;
+                case 11: //libro mas prestado
+
+                    String libroMasPrestado;
+                    listaLibros = contenedores.getListaLibros();
+                    libroMasPrestado = contenedores.getLibroMasPrestado(listaLibros);
+
+                    System.out.println("El libro mas Prestado es " + libroMasPrestado);
+
+                    break;
                 default:
                     System.out.println("OPCION INVALIDA!!!");
-                    break;    
+                    break;
             }
-        }while(opcion != 11);           
+        } while (opcion != 12);
     }
 }
