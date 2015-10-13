@@ -95,8 +95,42 @@ public class Principal {
                     }
                     break;
                 case 4:
-                    cod = elLibro.capturaCodigo();
-                    ced = elEstu.capturaCedula();
+                    res = false;
+                    //cod = elLibro.capturaCodigo();
+                    bError = true;
+                    System.out.println("Digite el codigo del Libro:");
+                    do {
+                        try {
+                            cod = teclado.nextInt();
+                            bError = false;
+                        } catch (NumberFormatException ex) {
+                            System.out.println("error" + ex);
+                            System.out.println("Escriba un numero valido para el codigo del libro EJ: 40554 ");
+                            teclado.next();
+                            bError = true;
+                        }
+                    } while (bError);
+                    teclado.skip("\n");
+
+                    //ced = elEstu.capturaCedula();
+                    ced = 0;
+                    bError = true;
+                    teclado = new Scanner(System.in);
+                    System.out.println("Digite la cedula del Estudiante:");
+
+                    do {
+                        try {
+                            ced = teclado.nextInt();
+                            bError = false;
+                        } catch (InputMismatchException ex) {
+                            System.out.println("Escriba un numero valido para la cedula EJ: 112700030 ");
+                            teclado.next();
+                            bError = true;
+                        }
+                    } while (bError);
+
+                    teclado.skip("\n");
+
                     elEstu = contenedores.buscarEstudiante(ced);
                     elLibro = contenedores.buscarLibro(cod);
 
@@ -120,9 +154,43 @@ public class Principal {
                     }
                     break;
                 case 5:
+                    res = false;
+                    //cod = elLibro.capturaCodigo();
+                    cod = 0;
+                    bError = true;
+                    teclado = new Scanner(System.in);
+                    System.out.println("Digite el codigo del Libro:");
+                    do {
+                        try {
+                            cod = teclado.nextInt();
+                            bError = false;
+                        } catch (NumberFormatException ex) {
+                            System.out.println("error" + ex);
+                            System.out.println("Escriba un numero valido para el codigo del libro EJ: 40554 ");
+                            teclado.next();
+                            bError = true;
+                        }
+                    } while (bError);
+                    teclado.skip("\n");
 
-                    cod = elLibro.capturaCodigo();
-                    ced = elProfe.capturaCedula();
+                    //ced = elProfe.capturaCedula
+                    bError = true;
+                    ced = 0;
+                    teclado = new Scanner(System.in);
+                    System.out.println("Digite la cedula del Profesor:");
+                    do {
+                        try {
+                            ced = teclado.nextInt();
+                            bError = false;
+                        } catch (InputMismatchException ex) {
+                            System.out.println("Escriba un numero valido para la cedula EJ: 112700030 ");
+                            teclado.next();
+                            bError = true;
+                        }
+                    } while (bError);
+                    teclado.skip("\n");
+
+                    
                     elProfe = contenedores.buscarProfesor(ced);
                     elLibro = contenedores.buscarLibro(cod);
 

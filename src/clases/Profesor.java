@@ -81,11 +81,12 @@ public class Profesor extends Persona {
 
     public Integer capturaCedula() {
         boolean bError = true;
+        int ced = 0;
         Scanner teclado = new Scanner(System.in);
         System.out.println("Digite la cedula del Profesor:");
         do {
             try {
-                this.cedula = teclado.nextInt();
+                ced = teclado.nextInt();
                 bError = false;
             } catch (InputMismatchException ex) {
                 System.out.println("Escriba un numero valido para la cedula EJ: 112700030 ");
@@ -94,6 +95,6 @@ public class Profesor extends Persona {
             }
         } while (bError);
         teclado.skip("\n");
-        return this.cedula;
+        return ced;
     }
 }

@@ -113,12 +113,13 @@ public class Libro {
     }
 
     public Integer capturaCodigo() {
+        int cod = 0;
         boolean bError = true;
         Scanner teclado = new Scanner(System.in);
         System.out.println("Digite el codigo del Libro:");
         do {
             try {
-                this.codigo = teclado.nextInt();
+                cod = teclado.nextInt();
                 bError = false;
             } catch (NumberFormatException  ex) {
                 System.out.println("error" + ex);
@@ -128,6 +129,6 @@ public class Libro {
             }
         } while (bError);
         teclado.skip("\n");
-        return this.codigo;
+        return cod;
     }
 }
