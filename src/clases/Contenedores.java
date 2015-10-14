@@ -153,29 +153,40 @@ public class Contenedores {
         this.listaLibros = listaLibros;
     }
 
-    public String getLibroMasPrestado(Libro[] libros) {
+    public String getLibroMasPrestado(ReservacionEstudiantes[] libros) {
         String libroMasPrestado = "";
         int veces[] = new int[libros.length];
         int posicion = 0;
         int index = 0;
 
         for (int i = 0; i < libros.length; i++) {
-            libroMasPrestado = libros[i].getNombre();
-            for (int j = 0; j < libros.length; j++) {
-                if (libros[j].getNombre().equals(libroMasPrestado)) {
-                    veces[i]++;
+            try {
+                //libroMasPrestado = libros[i].getNombre();
+                for (int j = 0; j < libros.length; j++) {
+                    try {
+                        if (libros[i].getLibro().getNombre().equals(libros[j].getLibro().getNombre())) {
+                            veces[i]++;
+                        }
+                    } catch (NullPointerException e) {
+                        // do something other
+                    }
                 }
+            } catch (NullPointerException e) {
+                // do something other
             }
-
+            
+        }
             for (int k = 0; k < veces.length; k++) {
                 if (index < veces[k]) {
                     index = veces[k];
                     posicion = k;
                 }
             }
-            libroMasPrestado = libros[posicion].getNombre();
-
-        }
-        return libroMasPrestado;
+            try{
+                libroMasPrestado = libros[posicion].getLibro().getNombre();
+            }catch (NullPointerException e){
+                libroMasPrestado = "no hay libros prestados";
+            } 
+            return libroMasPrestado;
     }
 }

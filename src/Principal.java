@@ -264,9 +264,9 @@ public class Principal {
                     break;
                 case 11: //libro mas prestado
 
-                    String libroMasPrestado;
-                    listaLibros = contenedores.getListaLibros();
-                    libroMasPrestado = contenedores.getLibroMasPrestado(listaLibros);
+                    String libroMasPrestado = "";
+                    ReservacionEstudiantes[] ReservaEstu = contenedores.getListaReservaEstu();
+                    libroMasPrestado = contenedores.getLibroMasPrestado(ReservaEstu);
 
                     System.out.println("El libro mas Prestado es " + libroMasPrestado);
 

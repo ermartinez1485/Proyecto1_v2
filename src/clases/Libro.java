@@ -5,6 +5,9 @@
  */
 package clases;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -93,8 +96,21 @@ public class Libro {
         this.nombre = teclado.nextLine();
         System.out.println("Digite el nombre del Autor:");
         this.autor = teclado.nextLine();
+        
+        DateFormat format = new SimpleDateFormat("dd/MM/yy");
+        System.out.println("Ingrese la fecha del libro usando el siguiente formato dd/MM/yy ");
+        System.out.println("por ejemplo, la fecha actual: " + format.format(new Date()));
+        this.anno = null;
+        while (this.anno == null) {
+            String line = teclado.nextLine();
+            try {
+                this.anno = format.parse(line);
+            } catch (ParseException e) {
+                System.out.println("Formato no valido, intetelo nuevamente, EJ: " + format.format(new Date()));
+            }
+        }
 
-        System.out.println("El Año del Libro es:" + this.anno);
+        //System.out.println("El Año del Libro es:" + this.anno);
 
         System.out.println("Digite el Precio del Libro:");
 
